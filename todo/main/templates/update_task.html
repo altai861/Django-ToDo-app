@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+{% for task in tasks %}
+<a href="{% url 'tasks' %}">Go back</a>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" placeholder="Title" name="title" value="{{task.title}}">
+    <input type="text" placeholder="Description" name="description" value="{{task.description}}">
+    {% if task.complete %}
+        <input type="checkbox" name="complete" checked>
+    {% else %}
+        <input type="checkbox" name="complete" unchecked>
+    {% endif %}
+
+    <input type="submit" value="Update task">
+
+</form>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container m-2" id="add-task">
+    <a href="{% url 'tasks' %}" id="go-back">Go back</a>
+    <form method="post" id="add-task-form">
+        {% csrf_token %}
+        <input type="text" placeholder="Title" name="title">
+        <input type="text" placeholder="Description" name="description">
+        <input type="submit" value="Add task">
+    </form>
+</div>
+
+{% endblock %}

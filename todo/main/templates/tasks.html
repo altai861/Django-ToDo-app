@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="header" id="header">
+        <div class="m-3" >
+            <div class="row">
+                <h1 id="greeting">Hello? {{ request.user.username }}</h1>
+                <a id="logout"  href="{% url 'logout' %}">Logout</a>
+            </div>
+            
+            <div id="logout-and-add-task">
+                <a href="{% url 'add_task' %}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg>Add task</a>
+            </div>
+        </div>
+    </div>
+    <div id="tasks">
+            {% for task in tasks %}
+            {% if task.complete == False %}
+                <div class="card m-3 p-2">
+                    {% if task.complete %}
+                        <div class="card-header" id="done">
+                            Done
+                        </div>
+                    {% else %}
+                        <div class="card-header" id="not-done">
+                            Not done
+                        </div>
+                    {% endif %}
+                
+                    <div class="card-body">
+                    <h5 class="card-title">{{task.title}}</h5>
+                    <p class="card-text">{{task.description}}</p>
+                    <a href="{% url 'update_task' task.id %}" class="btn btn-primary">Update Task</a>
+                    <a href="{% url 'delete_task' task.id %}" class="btn btn-primary">Delete Task</a>
+                    </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+            {% for task in tasks %}
+            {% if task.complete %}
+                <div class="card m-3 p-2">
+                    {% if task.complete %}
+                        <div class="card-header" id="done">
+                            Done
+                        </div>
+                    {% else %}
+                        <div class="card-header" id="not-done">
+                            Not done
+                        </div>
+                    {% endif %}
+                
+                    <div class="card-body">
+                    <h5 class="card-title">{{task.title}}</h5>
+                    <p class="card-text">{{task.description}}</p>
+                    <a href="{% url 'update_task' task.id %}" class="btn btn-primary">Update Task</a>
+                    <a href="{% url 'delete_task' task.id %}" class="btn btn-primary">Delete Task</a>
+                    </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+    </div>
+
+{% endblock %}
+ 
